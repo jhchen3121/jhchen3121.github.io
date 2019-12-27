@@ -2,7 +2,7 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Python虚拟环境配置 | San Andreas&#39;s Blog</title>
+<title>Python利用xlwt写入excel保持原模板样式 | San Andreas&#39;s Blog</title>
 <meta name="description" content="问题记录以及分享......" />
 <link rel="shortcut icon" href="https://jhchen3121.github.io/favicon.ico?v=1577448503443">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
@@ -73,7 +73,7 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              Python虚拟环境配置
+              Python利用xlwt写入excel保持原模板样式
             </h2>
             <div class="post-info">
               <span>
@@ -91,34 +91,67 @@
             
             <div class="post-content-wrapper">
               <div class="post-content">
-                <p>各个项目需要进行虚拟环境的配置，如下所示：</p>
-<pre><code>#入口参数判断
-if [ ! $1 ];then
-    PROJ_DIR=`pwd`
-else
-    PROJ_DIR=$1
-fi
+                <h3 id="说明">说明</h3>
+<p>由于默认xlwt包在写入excel时会初始化excel的样式，导致与预期不一致，通过以下方法能够保证原excel的基础样式写入</p>
+<h3 id="package">package</h3>
+<p>需要三个库：</p>
+<ol>
+<li>xlrd</li>
+<li>xlwt</li>
+<li>xlutils</li>
+</ol>
+<h3 id="写入方法">写入方法</h3>
+<p>编写方法函数</p>
+<pre><code>def _getOutCell(sheet, colIndex, rowIndex):
+    row = sheet._Worksheet__rows.get(rowIndex)
+    if not row: return None
 
-VENV=${PROJ_DIR}/.env
-#FIXME
-PROJ_NAME=(项目名称)
+    cell = row._Row__cells.get(colIndex)
+    return cell
 
-if [ ! -e ${VENV} ];then
-    virtualenv --never-download --prompt &quot;(${PROJ_NAME})&quot; ${VENV} -p $(type -p python2.7)
-fi
+def setOutCell(sheet, col, row, value, data_style=None):
+    previousCell = _getOutCell(sheet, col, row)
 
-source ${VENV}/bin/activate
+    if data_style:
+        sheet.write(row, col, value, data_style)
+    else:
+        sheet.write(row, col, value)
+    
+    if previousCell:
+        newCell = _getOutCell(sheet, col, row)
+        if newCell: newCell.xf_idx = previousCell.xf_idx
+</code></pre>
+<h3 id="调用示例">调用示例</h3>
+<pre><code>from xlutils.copy import copy
+import xlrd
+import xlwt
 
-export PYTHONPATH=${PROJ_DIR}/server:${PROJ_DIR}/lib:${PROJ_DIR}
-export LD_LIBRARY_PATH=${PROJ_DIR}/lib
-export LD_PRELOAD=${PROJ_DIR}/lib/hijack.so
-export PROJ_NAME
-export PROJ_DIR
+sink_templete = xlrd.open_workbook(path, formatting_info=True)
+workbook = copy(sink_templete)
+
+sheet = workbook.get_sheet(0)
+setOutCell(sheet, 1, 1, 'test')
+
+workbook.save(new_path)
 </code></pre>
 
               </div>
               <div class="toc-container">
-                
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#%E8%AF%B4%E6%98%8E">说明</a></li>
+<li><a href="#package">package</a></li>
+<li><a href="#%E5%86%99%E5%85%A5%E6%96%B9%E6%B3%95">写入方法</a></li>
+<li><a href="#%E8%B0%83%E7%94%A8%E7%A4%BA%E4%BE%8B">调用示例</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
               </div>
             </div>
           </article>
@@ -127,9 +160,9 @@ export PROJ_DIR
         
           <div class="next-post">
             <div class="next">下一篇</div>
-            <a href="https://jhchen3121.github.io/post/vim-pei-zhi">
+            <a href="https://jhchen3121.github.io/post/python-xu-ni-huan-jing-pei-zhi">
               <h3 class="post-title">
-                vim配置
+                Python虚拟环境配置
               </h3>
             </a>
           </div>
