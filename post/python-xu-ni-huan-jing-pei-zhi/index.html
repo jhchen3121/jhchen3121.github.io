@@ -1,8 +1,8 @@
 <html>
   <head>
-  <meta charset="utf-8" />
+    <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>San Andreas</title>
+<title>Python虚拟环境配置 | San Andreas</title>
 <meta name="description" content="问题记录以及分享......" />
 <link rel="shortcut icon" href="https://jhchen3121.github.io/favicon.ico?v=1577445950371">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
@@ -70,18 +70,98 @@
   </div>
 </div>
 
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              Python虚拟环境配置
+            </h2>
+            <div class="post-info">
+              <span>
+                2019-12-27
+              </span>
+              <span>
+                1 min read
+              </span>
+              
+                <a href="https://jhchen3121.github.io/tag/sa0lwLZhM" class="post-tag">
+                  # python
+                </a>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <p>各个项目需要进行虚拟环境的配置，如下所示：</p>
+<pre><code>#入口参数判断
+if [ ! $1 ];then
+    PROJ_DIR=`pwd`
+else
+    PROJ_DIR=$1
+fi
 
-        <div class="tags-container">
-          
-            <a class="tag" href="https://jhchen3121.github.io/tag/sa0lwLZhM">python</a>
-          
-            <a class="tag" href="https://jhchen3121.github.io/tag/yurMbPEXC">vim</a>
-          
-            <a class="tag" href="https://jhchen3121.github.io/tag/fVrjWX7vI">tmux</a>
-          
-            <a class="tag" href="https://jhchen3121.github.io/tag/drRTj2EVu">OGG</a>
-          
+VENV=${PROJ_DIR}/.env
+#FIXME
+PROJ_NAME=(项目名称)
+
+if [ ! -e ${VENV} ];then
+    virtualenv --never-download --prompt &quot;(${PROJ_NAME})&quot; ${VENV} -p $(type -p python2.7)
+fi
+
+source ${VENV}/bin/activate
+
+export PYTHONPATH=${PROJ_DIR}/server:${PROJ_DIR}/lib:${PROJ_DIR}
+export LD_LIBRARY_PATH=${PROJ_DIR}/lib
+export LD_PRELOAD=${PROJ_DIR}/lib/hijack.so
+export PROJ_NAME
+export PROJ_DIR
+</code></pre>
+
+              </div>
+              <div class="toc-container">
+                
+              </div>
+            </div>
+          </article>
         </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://jhchen3121.github.io/post/vim-pei-zhi">
+              <h3 class="post-title">
+                vim配置
+              </h3>
+            </a>
+          </div>
+        
+
+        
+          
+            <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+
+<script>
+
+  var gitalk = new Gitalk({
+    clientID: '295079dc796dbdf2fcc4',
+    clientSecret: '70b5bb343e215160be6941fcf818f335a06c2dfa',
+    repo: 'jhchen3121.github.io',
+    owner: 'jhchen3121',
+    admin: ['jhchen3121'],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+
+</script>
+
+          
+
+          
+        
 
         <div class="site-footer">
    | 

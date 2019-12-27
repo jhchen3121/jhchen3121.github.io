@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://jhchen3121.github.io</id>
     <title>San Andreas</title>
-    <updated>2019-12-21T03:13:55.532Z</updated>
+    <updated>2019-12-27T11:25:55.677Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://jhchen3121.github.io"/>
     <link rel="self" href="https://jhchen3121.github.io/atom.xml"/>
@@ -10,6 +10,160 @@
     <logo>https://jhchen3121.github.io/images/avatar.png</logo>
     <icon>https://jhchen3121.github.io/favicon.ico</icon>
     <rights>All rights reserved 2019, San Andreas</rights>
+    <entry>
+        <title type="html"><![CDATA[Python虚拟环境配置]]></title>
+        <id>https://jhchen3121.github.io/post/python-xu-ni-huan-jing-pei-zhi</id>
+        <link href="https://jhchen3121.github.io/post/python-xu-ni-huan-jing-pei-zhi">
+        </link>
+        <updated>2019-12-27T11:24:20.000Z</updated>
+        <content type="html"><![CDATA[<p>各个项目需要进行虚拟环境的配置，如下所示：</p>
+<pre><code>#入口参数判断
+if [ ! $1 ];then
+    PROJ_DIR=`pwd`
+else
+    PROJ_DIR=$1
+fi
+
+VENV=${PROJ_DIR}/.env
+#FIXME
+PROJ_NAME=(项目名称)
+
+if [ ! -e ${VENV} ];then
+    virtualenv --never-download --prompt &quot;(${PROJ_NAME})&quot; ${VENV} -p $(type -p python2.7)
+fi
+
+source ${VENV}/bin/activate
+
+export PYTHONPATH=${PROJ_DIR}/server:${PROJ_DIR}/lib:${PROJ_DIR}
+export LD_LIBRARY_PATH=${PROJ_DIR}/lib
+export LD_PRELOAD=${PROJ_DIR}/lib/hijack.so
+export PROJ_NAME
+export PROJ_DIR
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[vim配置]]></title>
+        <id>https://jhchen3121.github.io/post/vim-pei-zhi</id>
+        <link href="https://jhchen3121.github.io/post/vim-pei-zhi">
+        </link>
+        <updated>2019-12-27T11:22:26.000Z</updated>
+        <content type="html"><![CDATA[<p>vim配置(python) 在home目录下创建.exrc</p>
+<pre><code>:imap jk &lt;Esc&gt;
+set tabstop=4
+set softtabstop=4
+set autoindent
+set smartindent
+set expandtab
+set shiftwidth=4
+set smarttab
+set hls 
+set laststatus=2
+syntax on
+autocmd FileType make set noexpandtab
+autocmd FileType python setlocal et sta sw=4 sts=4
+&quot;tab显示为红色
+autocmd FileType python match ErrorMsg /\s*\t/
+set foldmethod=indent
+set foldlevel=99
+if has(&quot;autocmd&quot;)
+  filetype indent on
+endif
+filetype plugin on
+set ofu=syntaxcomplete#Complete
+set number
+set ruler
+set nolinebreak
+set background=light
+set showmatch
+set autochdir
+set shortmess=atI
+set shiftround
+
+set t_Co=256
+colorscheme desert
+hi LineNr ctermfg=245 ctermbg=235
+&quot;set cursorline
+&quot;hi CursorLine ctermbg=235 cterm=NONE guibg=Grey40
+&quot; python文件高亮显示行尾的空格，Tab
+&quot;记住上次打开的位置
+au BufReadPost * if line(&quot;'\&quot;&quot;) &gt; 0|if line(&quot;'\&quot;&quot;) &lt;= line(&quot;$&quot;)|exe(&quot;norm '\&quot;&quot;)|else|exe &quot;norm $&quot;|endif|endif
+&quot; 退出粘贴模式
+au InsertLeave * set nopaste
+&quot; vue高亮，继承html
+au BufRead,BufNewFile *.vue set filetype=html
+auto BufNewFile *.py call PythonHeader()
+func PythonHeader()
+    call setline(1, &quot;#!/usr/bin/env python&quot;)
+    call append(1, &quot;# -*- coding: utf-8 -*-&quot;)
+    call append(2, &quot;&quot;)
+    call append(3, &quot;from __future__ import unicode_literals&quot;)
+    call append(4, &quot;from __future__ import absolute_import&quot;)
+endf
+noremap &lt;F1&gt; &lt;Esc&gt;
+noremap &lt;F2&gt;  :set number!&lt;CR&gt;
+nnoremap &lt;F3&gt; :set list!&lt;CR&gt;
+&quot; 关闭上下左右按键
+map &lt;Left&gt; &lt;Nop&gt;
+map &lt;Right&gt; &lt;Nop&gt;
+map &lt;Up&gt; &lt;Nop&gt;
+map &lt;Down&gt; &lt;Nop&gt;
+&quot; press space to fold/unfold code
+nnoremap &lt;space&gt; za
+vnoremap &lt;space&gt; zf
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[tmux配置]]></title>
+        <id>https://jhchen3121.github.io/post/tmux-pei-zhi</id>
+        <link href="https://jhchen3121.github.io/post/tmux-pei-zhi">
+        </link>
+        <updated>2019-12-27T11:19:13.000Z</updated>
+        <content type="html"><![CDATA[<p>tmux个人使用配置，在home目录下创建.tmux.conf</p>
+<pre><code># base settings
+set -g default-terminal &quot;screen-256-color&quot;
+set -g terminal-override &quot;,rxvt-unicode-256-color:Tc&quot;
+set -g base-index 1
+set -g pane-base-index 1
+set -g status-interval 1
+set -g status-keys vi
+# prefix key
+set-option -g prefix C-a 
+unbind-key C-b 
+bind-key C-a send-prefix
+bind-key -n F5 prev
+bind-key -n F6 next
+# bindkeys
+setw -g mode-keys vi
+setw -g automatic-rename on
+setw -g allow-rename on
+#split window
+unbind '&quot;' 
+bind - splitw -v
+unbind %
+bind | splitw -h
+#select pane
+bind k selectp -U
+bind j selectp -D
+bind h selectp -L
+bind l selectp -R
+set -g history-limit 65535
+set -g base-index 1
+set -g pane-base-index 1
+
+set -g default-terminal xterm
+set -g status-bg black
+set -g status-fg white
+bind-key -t vi-copy v begin-selection
+bind-key -t vi-copy y copy-selection
+set-window-option -g window-status-current-bg blue
+set-window-option -g window-status-format '#[dim]#I:#[default]#W#[fg=grey,dim]'
+set-window-option -g window-status-current-format '#[fg-cyan,bold]#I#[fg=blue]:#[fg=cyan]#W#[fg=dim]'
+set -g status-right '#[fg=green][#[fg=cyan]%Y-%m-%d %H:%M:%S#[fg=green]]'
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[OGG数据同步]]></title>
         <id>https://jhchen3121.github.io/post/ogg-sjtb</id>
@@ -540,38 +694,6 @@ key.converter.schema.registry.url=http://localhost:8081
 value.converter.schema.registry.url=http://localhost:8081
 </code></pre>
 <p>使用avro格式进行传输，并连接schema_registry</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Hello Gridea]]></title>
-        <id>https://jhchen3121.github.io/post/hello-gridea</id>
-        <link href="https://jhchen3121.github.io/post/hello-gridea">
-        </link>
-        <updated>2018-12-11T16:00:00.000Z</updated>
-        <summary type="html"><![CDATA[<p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
-✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
-]]></summary>
-        <content type="html"><![CDATA[<p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
-✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
-<!-- more -->
-<p><a href="https://github.com/getgridea/gridea">Github</a><br>
-<a href="https://gridea.dev/">Gridea 主页</a><br>
-<a href="http://fehey.com/">示例网站</a></p>
-<h2 id="特性">特性👇</h2>
-<p>📝  你可以使用最酷的 <strong>Markdown</strong> 语法，进行快速创作</p>
-<p>🌉  你可以给文章配上精美的封面图和在文章任意位置插入图片</p>
-<p>🏷️  你可以对文章进行标签分组</p>
-<p>📋  你可以自定义菜单，甚至可以创建外部链接菜单</p>
-<p>💻  你可以在 <strong>Windows</strong>，<strong>MacOS</strong> 或 <strong>Linux</strong> 设备上使用此客户端</p>
-<p>🌎  你可以使用 <strong>𝖦𝗂𝗍𝗁𝗎𝖻 𝖯𝖺𝗀𝖾𝗌</strong> 或 <strong>Coding Pages</strong> 向世界展示，未来将支持更多平台</p>
-<p>💬  你可以进行简单的配置，接入 <a href="https://github.com/gitalk/gitalk">Gitalk</a> 或 <a href="https://github.com/SukkaW/DisqusJS">DisqusJS</a> 评论系统</p>
-<p>🇬🇧  你可以使用<strong>中文简体</strong>或<strong>英语</strong></p>
-<p>🌁  你可以任意使用应用内默认主题或任意第三方主题，强大的主题自定义能力</p>
-<p>🖥  你可以自定义源文件夹，利用 OneDrive、百度网盘、iCloud、Dropbox 等进行多设备同步</p>
-<p>🌱 当然 <strong>Gridea</strong> 还很年轻，有很多不足，但请相信，它会不停向前 🏃</p>
-<p>未来，它一定会成为你离不开的伙伴</p>
-<p>尽情发挥你的才华吧！</p>
-<p>😘 Enjoy~</p>
 ]]></content>
     </entry>
 </feed>
