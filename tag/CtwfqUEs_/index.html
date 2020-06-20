@@ -3,7 +3,7 @@
     <meta charset="utf-8"/>
 <meta name="description" content=""/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Python虚拟环境配置 | San Andreas&#39;s Blog</title>
+<title>爬虫 | San Andreas&#39;s Blog</title>
 <link rel="shortcut icon" href="https://jhchen3121.github.io/favicon.ico?v=1592632492532">
 <link href="https://cdn.bootcss.com/font-awesome/5.11.2/css/all.css" rel="stylesheet">
 <link rel="stylesheet" href="https://jhchen3121.github.io/styles/main.css">
@@ -30,11 +30,11 @@
 
 
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 </head>
 <body>
 <div class="main gt-bg-theme-color-first">
-    <nav class="navbar navbar-expand-lg">
+    <div class="main-content">
+        <nav class="navbar navbar-expand-lg">
     <div class="navbar-brand">
         <img class="user-avatar" src="/images/avatar.png" alt="头像">
         <div class="site-name gt-c-content-color-first">
@@ -83,92 +83,49 @@
         </div>
     </div>
 </nav>
-    <div class="post-container">
-        <div class="post-detail gt-bg-theme-color-second">
-            <article class="gt-post-content">
-                <h2 class="post-title">
-                    Python虚拟环境配置
-                </h2>
-                <div class="post-info">
-                    <time class="post-time gt-c-content-color-first">
-                        · 2019-12-27 ·
-                    </time>
-                    
-                        <a href="https://jhchen3121.github.io/tag/sa0lwLZhM" class="post-tags">
-                            # python
-                        </a>
-                    
-                </div>
-                <div class="post-content">
-                    <p>各个项目需要进行虚拟环境的配置，如下所示：</p>
-<pre><code>#入口参数判断
-if [ ! $1 ];then
-    PROJ_DIR=`pwd`
-else
-    PROJ_DIR=$1
-fi
-
-VENV=${PROJ_DIR}/.env
-#FIXME
-PROJ_NAME=(项目名称)
-
-if [ ! -e ${VENV} ];then
-    virtualenv --never-download --prompt &quot;(${PROJ_NAME})&quot; ${VENV} -p $(type -p python2.7)
-fi
-
-source ${VENV}/bin/activate
-
-export PYTHONPATH=${PROJ_DIR}/server:${PROJ_DIR}/lib:${PROJ_DIR}
-export LD_LIBRARY_PATH=${PROJ_DIR}/lib
-export LD_PRELOAD=${PROJ_DIR}/lib/hijack.so
-export PROJ_NAME
-export PROJ_DIR
-</code></pre>
-
-                </div>
-            </article>
+        <div class="current-tag-container">
+            <h2 class="title gt-c-content-color-first">
+                #爬虫
+            </h2>
         </div>
-
+        <div class="post-list-container">
+    <div class="post-inner">
         
-            <div class="next-post">
-                <div class="next gt-c-content-color-first">下一篇</div>
-                <a href="https://jhchen3121.github.io/post/vim-pei-zhi" class="post-title gt-a-link">
-                    vim配置
-                </a>
+            <div class="post gt-bg-theme-color-second">
+                <div class="post-left">
+                    <div>
+                        
+                        <a href="https://jhchen3121.github.io/post/scrapy-kuang-jia">
+                            <span class="post-title gt-c-content-color-first">Scrapy框架</span>
+                        </a>
+                    </div>
+                    <div class="gt-post-content post-abstract gt-c-content-color-second">
+                        
+                    </div>
+                    <div class="post-info">
+                        <time class="post-time gt-c-content-color-first">
+                            发布于 · 2020-06-20 ·
+                        </time>
+                        
+                            <a href="https://jhchen3121.github.io/tag/CtwfqUEs_" class="post-tag">
+                                # 爬虫
+                            </a>
+                        
+                            <a href="https://jhchen3121.github.io/tag/sa0lwLZhM" class="post-tag">
+                                # python
+                            </a>
+                        
+                    </div>
+                </div>
+                
             </div>
         
-
-        
-
-        
-            
-                <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
-<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
-
-<div id="gitalk-container"></div>
-
-<script>
-
-  var gitalk = new Gitalk({
-    clientID: '295079dc796dbdf2fcc4',
-    clientSecret: '70b5bb343e215160be6941fcf818f335a06c2dfa',
-    repo: 'jhchen3121.github.io',
-    owner: 'jhchen3121',
-    admin: ['jhchen3121'],
-    id: location.pathname,      // Ensure uniqueness and length less than 50
-    distractionFreeMode: false  // Facebook-like distraction free mode
-  })
-
-  gitalk.render('gitalk-container')
-
-</script>
-
-            
-
-            
-        
-
-        
+    </div>
+</div>
+        <div class="pagination-container">
+    
+    
+</div>
 
         <div class="site-footer gt-c-content-color-first">
     <div class="slogan gt-c-content-color-first">问题记录以及分享......</div>

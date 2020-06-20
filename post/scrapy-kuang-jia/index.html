@@ -3,7 +3,7 @@
     <meta charset="utf-8"/>
 <meta name="description" content=""/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Python虚拟环境配置 | San Andreas&#39;s Blog</title>
+<title>Scrapy框架 | San Andreas&#39;s Blog</title>
 <link rel="shortcut icon" href="https://jhchen3121.github.io/favicon.ico?v=1592632492532">
 <link href="https://cdn.bootcss.com/font-awesome/5.11.2/css/all.css" rel="stylesheet">
 <link rel="stylesheet" href="https://jhchen3121.github.io/styles/main.css">
@@ -87,12 +87,16 @@
         <div class="post-detail gt-bg-theme-color-second">
             <article class="gt-post-content">
                 <h2 class="post-title">
-                    Python虚拟环境配置
+                    Scrapy框架
                 </h2>
                 <div class="post-info">
                     <time class="post-time gt-c-content-color-first">
-                        · 2019-12-27 ·
+                        · 2020-06-20 ·
                     </time>
+                    
+                        <a href="https://jhchen3121.github.io/tag/CtwfqUEs_" class="post-tags">
+                            # 爬虫
+                        </a>
                     
                         <a href="https://jhchen3121.github.io/tag/sa0lwLZhM" class="post-tags">
                             # python
@@ -100,29 +104,114 @@
                     
                 </div>
                 <div class="post-content">
-                    <p>各个项目需要进行虚拟环境的配置，如下所示：</p>
-<pre><code>#入口参数判断
-if [ ! $1 ];then
-    PROJ_DIR=`pwd`
-else
-    PROJ_DIR=$1
-fi
+                    <h3 id="简介">简介</h3>
+<p>Scrapy是一个用于爬网网站并提取结构化数据的应用程序框架，可用于各种有用的应用程序，例如数据挖掘，信息处理或历史档案。</p>
+<p>即使Scrapy最初是为Web抓取而设计的，它也可以用于使用API​​（例如Amazon Associates Web Services）或用作通用Web 搜寻器来提取数据。</p>
+<h3 id="安装">安装</h3>
+<p>最新版本的scrapy框架已经不再对py2提供支持，因此建议在py3上进行框架的搭建，安装执行：</p>
+<pre><code>pip install scrapy
+</code></pre>
+<h3 id="使用">使用</h3>
+<h5 id="初始化">初始化</h5>
+<p>初始化项目执行：</p>
+<pre><code>scrapy startproject (项目名称，以tutorial为例) (绝对路径可有可无，默认在当前路径)
+</code></pre>
+<p>项目目录如下：</p>
+<pre><code>tutorial/
+    scrapy.cfg            # deploy configuration file
 
-VENV=${PROJ_DIR}/.env
-#FIXME
-PROJ_NAME=(项目名称)
+    tutorial/             # project's Python module, you'll import your code from here
+        __init__.py
 
-if [ ! -e ${VENV} ];then
-    virtualenv --never-download --prompt &quot;(${PROJ_NAME})&quot; ${VENV} -p $(type -p python2.7)
-fi
+        items.py          # project items definition file
 
-source ${VENV}/bin/activate
+        middlewares.py    # project middlewares file
 
-export PYTHONPATH=${PROJ_DIR}/server:${PROJ_DIR}/lib:${PROJ_DIR}
-export LD_LIBRARY_PATH=${PROJ_DIR}/lib
-export LD_PRELOAD=${PROJ_DIR}/lib/hijack.so
-export PROJ_NAME
-export PROJ_DIR
+        pipelines.py      # project pipelines file
+
+        settings.py       # project settings file
+
+        spiders/          # a directory where you'll later put your spiders
+            __init__.py
+</code></pre>
+<h5 id="demo">demo</h5>
+<p>爬虫脚本编写与spiders文件夹下，如下：</p>
+<pre><code class="language-python">#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+from __future__ import unicode_literals
+from __future__ import absolute_import
+
+import scrapy
+
+class QuotesSpider(scrapy.Spider):
+    # 爬虫名称，启动爬虫根据该名称进行指定
+    name = 'quotes'
+    
+    # 初始化请求的url，可不用start_requests，具体见官方文档
+    def start_requests(self):
+
+        urls = [ 
+            'http://quotes.toscrape.com/page/1/',
+        ]   
+
+        for url in urls:
+            yield scrapy.Request(url=url, callback=self.parse)
+
+    # 默认的回调方法
+    def parse(self, response):
+
+        # 此处通过xpath来解析页面元素，亦可用css等，详见官方文档
+        for quote in response.xpath(&quot;&quot;&quot;//div[@class='quote']&quot;&quot;&quot;):
+            yield {
+                'text': quote.xpath(&quot;&quot;&quot;./span[@class='text']/text()&quot;&quot;&quot;).get(),
+                'author': quote.xpath(&quot;&quot;&quot;./span/small[@class='author']/text()&quot;&quot;&quot;).get(),
+                'tages': quote.xpath(&quot;&quot;&quot;./div/a[@class='tag']/text()&quot;&quot;&quot;).getall(),
+            }   
+
+        next_page = response.xpath(&quot;&quot;&quot;//ul[@class='pager']/li/a/@href&quot;&quot;&quot;).get()
+
+        self.log('-----------------------------')
+        self.log(next_page)
+        if next_page:
+            # url拼接，用同样的parse方法处理下一页的相应内容
+            next_page = response.urljoin(next_page)
+            yield scrapy.Request(next_page, callback=self.parse)
+
+</code></pre>
+<h5 id="运行">运行</h5>
+<p>返回至项目的初始目录，执行以下命令来运行爬虫：</p>
+<pre><code>scrapy crawl quotes
+</code></pre>
+<h3 id="api">API</h3>
+<p>上述方法讲了如何在scrapy框架中运行一个爬虫，但实际生产中可能是需要通过外部接口调用来进行爬虫的启动，因此通过scrapy框架提供的api来进行爬虫的启动，具体事例代码如下：</p>
+<pre><code class="language-python">#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+from __future__ import unicode_literals
+from __future__ import absolute_import
+
+from twisted.internet import reactor
+from tutorial.spiders.quotes_spider import QuotesSpider
+from scrapy.crawler import CrawlerProcess, CrawlerRunner
+from scrapy.utils.project import get_project_settings
+
+import os
+
+def main():
+
+    my_spider = QuotesSpider()
+    settings = get_project_settings()
+    os.environ['SCRAPY_SETTINGS_MODULE'] = 'tutorial.settings'
+    settings_module_path = os.environ['SCRAPY_SETTINGS_MODULE']
+    settings.setmodule(settings_module_path, priority='project')
+
+    crawler = CrawlerProcess(settings)
+    crawler.crawl(QuotesSpider)
+    crawler.start()
+
+if __name__ == '__main__':
+    main()
 </code></pre>
 
                 </div>
@@ -132,8 +221,8 @@ export PROJ_DIR
         
             <div class="next-post">
                 <div class="next gt-c-content-color-first">下一篇</div>
-                <a href="https://jhchen3121.github.io/post/vim-pei-zhi" class="post-title gt-a-link">
-                    vim配置
+                <a href="https://jhchen3121.github.io/post/python-li-yong-xlwt-xie-ru-excel-bao-chi-yuan-mo-ban-yang-shi" class="post-title gt-a-link">
+                    Python利用xlwt写入excel保持原模板样式
                 </a>
             </div>
         

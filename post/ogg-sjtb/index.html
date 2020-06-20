@@ -1,99 +1,106 @@
 <html>
-  <head>
-    <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<head>
+    <meta charset="utf-8"/>
+<meta name="description" content=""/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>OGG数据同步 | San Andreas&#39;s Blog</title>
-<meta name="description" content="问题记录以及分享......" />
-<link rel="shortcut icon" href="https://jhchen3121.github.io/favicon.ico?v=1577448503443">
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="shortcut icon" href="https://jhchen3121.github.io/favicon.ico?v=1592632492532">
+<link href="https://cdn.bootcss.com/font-awesome/5.11.2/css/all.css" rel="stylesheet">
 <link rel="stylesheet" href="https://jhchen3121.github.io/styles/main.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
-<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dockerfile.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dart.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/go.min.js"></script>
+<script src="https://cdn.bootcss.com/moment.js/2.23.0/moment.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+
+<!-- DEMO JS -->
+<!--<script src="media/scripts/index.js"></script>-->
 
 
 
-  </head>
-  <body>
-    <div class="main">
-      <div class="main-content">
-        <div class="site-header">
-  <a href="https://jhchen3121.github.io">
-  <img class="avatar" src="https://jhchen3121.github.io/images/avatar.png?v=1577448503443" alt="">
-  </a>
-  <h1 class="site-title">
-    San Andreas&#39;s Blog
-  </h1>
-  <p class="site-description">
-    问题记录以及分享......
-  </p>
-  <div class="menu-container">
-    
-      
-        <a href="/" class="menu">
-          首页
-        </a>
-      
-    
-      
-        <a href="/archives" class="menu">
-          归档
-        </a>
-      
-    
-      
-        <a href="/tags" class="menu">
-          标签
-        </a>
-      
-    
-      
-        <a href="/post/about" class="menu">
-          关于
-        </a>
-      
-    
-  </div>
-  <div class="social-container">
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-  </div>
-</div>
-
-        <div class="post-detail">
-          <article class="post">
-            <h2 class="post-title">
-              OGG数据同步
-            </h2>
-            <div class="post-info">
-              <span>
-                2019-12-21
-              </span>
-              <span>
-                14 min read
-              </span>
-              
-                <a href="https://jhchen3121.github.io/tag/drRTj2EVu" class="post-tag">
-                  # OGG
-                </a>
-              
-            </div>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+</head>
+<body>
+<div class="main gt-bg-theme-color-first">
+    <nav class="navbar navbar-expand-lg">
+    <div class="navbar-brand">
+        <img class="user-avatar" src="/images/avatar.png" alt="头像">
+        <div class="site-name gt-c-content-color-first">
+            San Andreas&#39;s Blog
+        </div>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars gt-c-content-color-first" style="font-size: 18px"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-nav mr-auto" style="text-align: center">
             
-              <img class="post-feature-image" src="https://jhchen3121.github.io/post-images/ogg-sjtb.jpeg" alt="">
+                <div class="nav-item">
+                    
+                        <a href="/" class="menu gt-a-link">
+                            首页
+                        </a>
+                    
+                </div>
             
-            <div class="post-content-wrapper">
-              <div class="post-content">
-                <h1 id="通过oracle-goldengate-同步数据到kudu">通过Oracle GoldenGate 同步数据到KUDU</h1>
+                <div class="nav-item">
+                    
+                        <a href="/archives" class="menu gt-a-link">
+                            归档
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/tags" class="menu gt-a-link">
+                            标签
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/post/about" class="menu gt-a-link">
+                            关于
+                        </a>
+                    
+                </div>
+            
+        </div>
+    </div>
+</nav>
+    <div class="post-container">
+        <div class="post-detail gt-bg-theme-color-second">
+            <article class="gt-post-content">
+                <h2 class="post-title">
+                    OGG数据同步
+                </h2>
+                <div class="post-info">
+                    <time class="post-time gt-c-content-color-first">
+                        · 2019-12-21 ·
+                    </time>
+                    
+                        <a href="https://jhchen3121.github.io/tag/drRTj2EVu" class="post-tags">
+                            # OGG
+                        </a>
+                    
+                </div>
+                <div class="post-content">
+                    <h1 id="通过oracle-goldengate-同步数据到kudu">通过Oracle GoldenGate 同步数据到KUDU</h1>
 <h2 id="环境配置">环境配置</h2>
 <p><strong>源机器信息：</strong></p>
 <p>OS: CentOS 6.8 x86_64</p>
@@ -618,86 +625,17 @@ value.converter.schema.registry.url=http://localhost:8081
 </code></pre>
 <p>使用avro格式进行传输，并连接schema_registry</p>
 
-              </div>
-              <div class="toc-container">
-                <ul class="markdownIt-TOC">
-<li><a href="#%E9%80%9A%E8%BF%87oracle-goldengate-%E5%90%8C%E6%AD%A5%E6%95%B0%E6%8D%AE%E5%88%B0kudu">通过Oracle GoldenGate 同步数据到KUDU</a>
-<ul>
-<li><a href="#%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE">环境配置</a><br>
-*<br>
-*<br>
-* <a href="#%E7%9B%AE%E6%A0%87%E6%9C%BA%E5%99%A8%E4%BF%A1%E6%81%AF">目标机器信息：</a></li>
-<li><a href="#%E9%85%8D%E7%BD%AE%E7%9B%AE%E6%A0%87%E6%9C%BA%E5%99%A8%E4%B8%8E%E6%BA%90%E6%9C%BA%E5%99%A8%E5%85%8D%E5%AF%86%E4%BA%92%E9%80%9A">配置目标机器与源机器免密互通</a></li>
-<li><a href="#%E6%BA%90%E6%9C%BA%E5%99%A8%E5%AE%89%E8%A3%85goldengate">源机器安装GoldenGate</a></li>
-<li><a href="#%E6%BA%90oracle%E4%B8%AD%E5%88%9B%E5%BB%BAgoldengate%E7%9A%84%E8%A1%A8%E7%A9%BA%E9%97%B4%E5%92%8C%E7%94%A8%E6%88%B7%E8%8B%A5%E5%B7%B2%E5%AD%98%E5%9C%A8%E5%88%99%E8%B7%B3%E8%BF%87">源Oracle中创建GoldenGate的表空间和用户(若已存在则跳过)</a></li>
-<li><a href="#%E5%9C%A8oracle%E4%B8%8A%E6%89%93%E5%BC%80%E4%BA%8B%E5%8A%A1%E6%97%A5%E5%BF%97">在Oracle上打开事务日志</a></li>
-<li><a href="#%E7%9B%AE%E6%A0%87%E6%9C%BA%E5%99%A8%E4%B8%8A%E5%AE%89%E8%A3%85oracle-goldengate-for-bigdata">目标机器上安装Oracle GoldenGate for BigData</a></li>
-<li><a href="#%E7%9B%AE%E6%A0%87%E6%9C%BA%E5%99%A8%E4%B8%8A%E5%AE%89%E8%A3%85cdh5">目标机器上安装CDH5</a></li>
-<li><a href="#%E6%BA%90%E6%9C%BA%E5%99%A8%E7%9A%84goldengate%E9%85%8D%E7%BD%AE">源机器的GoldenGate配置</a><br>
-*
-<ul>
-<li><a href="#%E7%94%9F%E6%88%90%E6%89%80%E9%9C%80%E6%96%87%E4%BB%B6%E5%A4%B9">生成所需文件夹</a></li>
-<li><a href="#globals">GLOBALS</a></li>
-<li><a href="#%E5%B0%86oracle-cbs%E4%B8%8B%E7%9A%84%E6%89%80%E6%9C%89%E8%A1%A8%E6%B7%BB%E5%8A%A0supplment%E6%97%A5%E5%BF%97%E7%BB%84">将Oracle CBS下的所有表添加supplment日志组</a></li>
-<li><a href="#%E7%BC%96%E8%BE%91manager%E7%9A%84%E9%85%8D%E7%BD%AE">编辑Manager的配置</a></li>
-<li><a href="#%E5%90%AF%E5%8A%A8manager">启动Manager</a></li>
-<li><a href="#%E6%9F%A5%E7%9C%8Bmanager%E7%9A%84%E8%BF%90%E8%A1%8C%E7%8A%B6%E6%80%81">查看Manager的运行状态</a></li>
-</ul>
-</li>
-<li><a href="#%E7%9B%AE%E6%A0%87%E6%9C%BA%E5%99%A8%E7%9A%84goldengate%E9%85%8D%E7%BD%AE">目标机器的GoldenGate配置</a><br>
-*
-<ul>
-<li><a href="#%E7%94%9F%E6%88%90%E6%89%80%E9%9C%80%E6%96%87%E4%BB%B6%E5%A4%B9-2">生成所需文件夹</a></li>
-<li><a href="#%E7%BC%96%E8%BE%91manager%E7%9A%84%E9%85%8D%E7%BD%AE-2">编辑Manager的配置</a></li>
-<li><a href="#%E5%90%AF%E5%8A%A8manager-2">启动Manager</a></li>
-<li><a href="#%E6%9F%A5%E7%9C%8Bmanager%E7%9A%84%E8%BF%90%E8%A1%8C%E7%8A%B6%E6%80%81-2">查看Manager的运行状态</a></li>
-</ul>
-</li>
-<li><a href="#%E5%88%9D%E5%A7%8B%E6%95%B0%E6%8D%AE%E5%AF%BC%E5%85%A5">初始数据导入</a>
-<ul>
-<li><a href="#%E9%85%8D%E7%BD%AE%E6%BA%90%E6%9C%BA%E5%99%A8%E4%B8%8A%E7%9A%84extract">配置源机器上的EXTRACT</a></li>
-<li><a href="#%E7%94%9F%E6%88%90cbs%E7%9A%84define%E6%96%87%E4%BB%B6">生成CBS的DEFINE文件</a></li>
-<li><a href="#%E7%9B%AE%E6%A0%87%E6%9C%BA%E5%99%A8%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E7%9A%84%E8%AE%BE%E7%BD%AE">目标机器环境变量的设置</a></li>
-<li><a href="#%E7%9B%AE%E6%A0%87%E6%9C%BA%E5%99%A8%E4%B8%8A%E7%9A%84replicat%E9%85%8D%E7%BD%AE">目标机器上的REPLICAT配置</a></li>
-<li><a href="#%E5%90%AF%E5%8A%A8extract">启动EXTRACT</a></li>
-<li><a href="#%E5%90%AF%E5%8A%A8replicat">启动REPLICAT</a></li>
-<li><a href="#%E6%A3%80%E6%9F%A5%E7%BB%93%E6%9E%9C">检查结果</a>
-<ul>
-<li><a href="#%E9%80%9A%E8%BF%87kafka%E6%A3%80%E6%9F%A5%E6%98%AF%E5%90%A6%E7%94%9F%E6%88%90%E5%AF%B9%E5%BA%94%E7%9A%84topic">通过kafka检查是否生成对应的topic</a></li>
-<li><a href="#%E6%A3%80%E6%9F%A5kafkatopic%E7%9A%84%E5%81%8F%E7%A7%BB%E9%87%8F%E6%A3%80%E6%9F%A5%E6%AD%A4%E6%97%B6%E6%95%B0%E6%8D%AE%E6%98%AF%E5%90%A6%E5%AF%BC%E5%85%A5">检查kafkatopic的偏移量，检查此时数据是否导入</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="#%E4%BA%8B%E5%8A%A1%E7%9A%84%E5%90%8C%E6%AD%A5">事务的同步</a>
-<ul>
-<li><a href="#%E6%BA%90%E6%9C%BA%E5%99%A8%E7%9A%84extract%E9%85%8D%E7%BD%AE">源机器的EXTRACT配置</a></li>
-<li><a href="#%E6%BA%90%E6%9C%BA%E5%99%A8%E7%9A%84data-pump%E7%9A%84%E9%85%8D%E7%BD%AE">源机器的Data Pump的配置</a></li>
-<li><a href="#%E7%9B%AE%E6%A0%87%E6%9C%BA%E5%99%A8%E7%9A%84replicat-%E7%9A%84%E9%85%8D%E7%BD%AE">目标机器的REPLICAT 的配置</a></li>
-</ul>
-</li>
-<li><a href="#%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E5%AF%BC%E5%85%A5">数据同步导入</a></li>
-<li><a href="#%E9%99%84%E5%BD%95">附录</a><br>
-*
-<ul>
-<li><a href="#confprops">conf.props</a></li>
-<li><a href="#avroproperties">avro.properties</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-
-              </div>
-            </div>
-          </article>
+                </div>
+            </article>
         </div>
 
         
 
         
-          
-            <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+
+        
+            
+                <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
 <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
 
 <div id="gitalk-container"></div>
@@ -710,7 +648,7 @@ value.converter.schema.registry.url=http://localhost:8081
     repo: 'jhchen3121.github.io',
     owner: 'jhchen3121',
     admin: ['jhchen3121'],
-    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    id: location.pathname,      // Ensure uniqueness and length less than 50
     distractionFreeMode: false  // Facebook-like distraction free mode
   })
 
@@ -718,58 +656,44 @@ value.converter.schema.registry.url=http://localhost:8081
 
 </script>
 
-          
+            
 
-          
+            
         
 
-        <div class="site-footer">
-   | 
-  <a class="rss" href="https://jhchen3121.github.io/atom.xml" target="_blank">RSS</a>
+        
+
+        <div class="site-footer gt-c-content-color-first">
+    <div class="slogan gt-c-content-color-first">问题记录以及分享......</div>
+    <div class="social-container">
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    </div>
+    <div class="footer-info">
+        
+    </div>
+    <div>
+        Theme by <a href="https://imhanjie.com/" target="_blank">imhanjie</a>, Powered by <a
+                href="https://github.com/getgridea/gridea" target="_blank">Gridea | <a href="https://jhchen3121.github.io/atom.xml" target="_blank">RSS</a></a>
+    </div>
 </div>
 
 <script>
-  hljs.initHighlightingOnLoad()
-
-  let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
-
-  // This should probably be throttled.
-  // Especially because it triggers during smooth scrolling.
-  // https://lodash.com/docs/4.17.10#throttle
-  // You could do like...
-  // window.addEventListener("scroll", () => {
-  //    _.throttle(doThatStuff, 100);
-  // });
-  // Only not doing it here to keep this Pen dependency-free.
-
-  window.addEventListener("scroll", event => {
-    let fromTop = window.scrollY;
-
-    mainNavLinks.forEach((link, index) => {
-      let section = document.getElementById(decodeURI(link.hash).substring(1));
-      let nextSection = null
-      if (mainNavLinks[index + 1]) {
-        nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
-      }
-      if (section.offsetTop <= fromTop) {
-        if (nextSection) {
-          if (nextSection.offsetTop > fromTop) {
-            link.classList.add("current");
-          } else {
-            link.classList.remove("current");    
-          }
-        } else {
-          link.classList.add("current");
-        }
-      } else {
-        link.classList.remove("current");
-      }
-    });
-  });
-
+    hljs.initHighlightingOnLoad()
 </script>
 
-      </div>
     </div>
-  </body>
+</div>
+</body>
 </html>
