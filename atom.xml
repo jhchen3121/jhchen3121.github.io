@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://jhchen3121.github.io</id>
     <title>San Andreas&apos;s Blog</title>
-    <updated>2020-06-20T05:55:05.672Z</updated>
+    <updated>2020-08-04T05:08:20.520Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://jhchen3121.github.io"/>
     <link rel="self" href="https://jhchen3121.github.io/atom.xml"/>
@@ -10,6 +10,46 @@
     <logo>https://jhchen3121.github.io/images/avatar.png</logo>
     <icon>https://jhchen3121.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, San Andreas&apos;s Blog</rights>
+    <entry>
+        <title type="html"><![CDATA[FRP内网穿透（二级域名）]]></title>
+        <id>https://jhchen3121.github.io/post/frp-nei-wang-chuan-tou-er-ji-yu-ming</id>
+        <link href="https://jhchen3121.github.io/post/frp-nei-wang-chuan-tou-er-ji-yu-ming">
+        </link>
+        <updated>2020-08-03T13:35:57.000Z</updated>
+        <content type="html"><![CDATA[<p>最近部署小程序后台管理端在云服务器，听群里建议frp能够实现内网穿透，通过内网来访问公网IP，一台云服务器即可使本地虚拟机通过公网访问。查阅了frp文档配置了二级域名进行测试，发现可行，以下为配置信息。</p>
+<h3 id="云服务器端">云服务器端</h3>
+<ol>
+<li>首先下载frp对应包，上传至云服务器并解压</li>
+<li>编辑frps.ini，内容如下：<pre><code>[common]
+ bind_port = 7005(与内网机器通讯端口)
+ subdomain_host = xxxx.xx(自己注册的域名)
+ vhost_http_port = 8080(http端口)
+</code></pre>
+</li>
+<li>配置完成后执行: <code>./frps -c ./frps.ini &amp;</code></li>
+</ol>
+<h3 id="内网端">内网端</h3>
+<ol>
+<li>同样需要frp包，解压</li>
+<li>编辑frpc.ini，内容如下：<pre><code>[common]
+server_addr = xx.xx.xx.xx(你的云服务器公网ip)
+server_port = 7005(与云服务器frp绑定的端口)
+
+[wechat_shop](服务名称可自定，若本地内网存在多个名字不可重复)
+type = http
+local_ip = 127.0.0.1
+local_port = 8878(本地项目服务所需要的端口号)
+subdomain = wechat(你的二级域名开头)
+</code></pre>
+</li>
+<li>配置完成后执行： <code>./frpc -c ./frpc.ini &amp;</code></li>
+</ol>
+<h3 id="解析">解析</h3>
+<p>做完以上步骤后需要在你的域名管理端增加二级域名的解析，例如上述我需要增加wechat的二级域名，则增加如下解析：<br>
+<img src="https://jhchen3121.github.io/post-images/1596517634363.png" alt=""></p>
+<p>做完上述步骤即可在你的内网通过二级域名来访问你的本地项目！</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Scrapy框架]]></title>
         <id>https://jhchen3121.github.io/post/scrapy-kuang-jia</id>
